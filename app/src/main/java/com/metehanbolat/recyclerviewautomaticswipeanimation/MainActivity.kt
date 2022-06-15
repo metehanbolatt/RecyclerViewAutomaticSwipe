@@ -20,17 +20,21 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         val list = listOf(
-            Item(R.color.black, "Black"),
-            Item(R.color.purple_200, "Mor"),
-            Item(R.color.purple_500, "Lahana"),
-            Item(R.color.purple_700, "Marul"),
-            Item(R.color.teal_200, "Biber"),
-            Item(R.color.teal_700, "Kiraz"),
-            Item(android.R.color.holo_orange_dark, "Kavun")
-
+            Item(R.drawable.image_0, "Summer 0"),
+            Item(R.drawable.image_1, "Summer 1"),
+            Item(R.drawable.image_2, "Summer 2"),
+            Item(R.drawable.image_3, "Summer 3"),
+            Item(R.drawable.image_4, "Summer 4"),
+            Item(R.drawable.image_5, "Summer 5"),
+            Item(R.drawable.image_6, "Summer 6"),
+            Item(R.drawable.image_7, "Summer 7"),
+            Item(R.drawable.image_8, "Summer 8"),
+            Item(R.drawable.image_9, "Summer 9")
         )
+
         adapter = ItemAdapter(list)
-        object : CountDownTimer(2000, 1000) {
+
+        val timer = object : CountDownTimer(2000, 1000) {
             override fun onFinish() {
                 binding.recyclerView.post {
                     binding.recyclerView.smoothScrollToPosition(0)
@@ -41,14 +45,17 @@ class MainActivity : AppCompatActivity() {
                     binding.recyclerView.smoothScrollToPosition(adapter.itemCount - 1)
                 }
             }
+        }
+
+        object : CountDownTimer(1000, 1000) {
+            override fun onTick(p0: Long) { }
+            override fun onFinish() {
+                timer.start()
+            }
         }.start()
+
         binding.recyclerView.layoutManager = SlowlyLinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerView.adapter = adapter
-        var a = 0
-        binding.button.setOnClickListener {
-            a++
-            binding.textView2.text = a.toString()
-        }
 
     }
 }
